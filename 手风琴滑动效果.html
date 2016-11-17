@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>手风琴滑动效果</title>
+</head>
+<style type="text/css">
+	.ts {
+		overflow: hidden;
+		width: 1200px;
+		margin: 0 auto;
+	}
+
+	.ts-ul {
+		overflow: hidden;
+		width: 100%;
+		height: 500px;
+		margin: 0 auto;
+	}
+
+	.ts-ul li {
+		list-style-type: none;
+		overflow: hidden;
+		float: left;
+		width: 95px;
+		-webkit-transition: width 0.5s;
+		-webkit-transform: translateZ(0);
+		
+	}
+
+	.ts-ul b {
+		-webkit-transition: all 0.5s;
+		width: 95px;
+		display: block;
+		height: 440px;
+		text-indent: -9999em;
+		background-color:#CCFFFF;
+		border:1px solid #000000;
+	}
+
+	.ts-ul-li1 {
+		/*background: url(http://gyc.woniu.com/tg/ad6/images/ts1_on.jpg) no-repeat;*/
+		background-color:#333333;
+		width:787px;
+		height:440px;
+	}
+
+	.ts-ul-li2 {
+		/*background: url(http://gyc.woniu.com/tg/ad6/images/ts2_on.jpg) no-repeat;*/
+		background-color:#666666;
+		width:787px;
+		height:440px;
+	}
+
+	.ts-ul-li3 {
+		/*background: url(http://gyc.woniu.com/tg/ad6/images/ts3_on.jpg) no-repeat;*/
+		background-color:#999999;
+		width:787px;
+		height:440px;
+	}
+
+	.ts-ul-li4 {
+		/*background: url(http://gyc.woniu.com/tg/ad6/images/ts4_on.jpg) no-repeat;*/
+		background-color:#CCCCCC;
+		width:787px;
+		height:440px;
+	}
+
+	.ts-ul li.on {
+		width: 787px;
+	}
+
+	.ts-ul li.on b {
+		opacity: 0.0;
+		filter: Alpha(opacity=0);
+		-webkit-transform: translate3d(-100%, 0, 0);
+	}
+
+	.ts-ul-li1 b {
+		background-position: 0 0
+	}
+
+	.ts-ul-li2 b {
+		background-position: -95px 0
+	}
+
+	.ts-ul-li3 b {
+		background-position: -190px 0
+	}
+
+	.ts-ul-li4 b {
+		background-position: -285px 0
+	}
+</style>
+<body>
+	<div class="ts">
+		<ul class="ts-ul">
+			<li class="ts-ul-li1"><b></b></li>
+			<li class="ts-ul-li2"><b></b></li>
+			<li class="ts-ul-li3"><b></b></li>
+			<li class="ts-ul-li4"><b></b></li>
+		</ul>
+	</div>
+
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function() {
+			$(".ts-ul li").mouseover(function() {
+				$(".ts-ul li.on").removeClass("on");
+				$(this).addClass("on");
+			}).eq(0).mouseover();
+		});
+	</script>
+</body>
+
+</html>

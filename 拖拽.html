@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="gb2312" />
+<title>javascript</title>
+<script type="text/javascript" src="js/event.js"></script>
+<style type="text/css"  style="display:block" contentEditable>
+	body{padding: 0; margin: 0;}
+	.demo{width:200px; height:200px; background-color:#66CCFF; border:5px solid #cccccc; position:absolute; top:100px; left:100px;}
+	.demo p{color: transparent; text-shadow: #111 0 0 5px; cursor:move;}
+</style>
+</head>
+
+<body>
+<!--这里是注释====这里是注释-->
+<div class="demo" id="drag">
+	<p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+	
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+
+
+//console.log输出文字模糊
+var _log = console.log;
+console.log = function() {
+_log.call(console, '%c' + [].slice.call(arguments).join(' '), 'color:transparent;text-shadow:0 0 2px rgba(0,0,0,.5);');
+};
+console.log("123");
+
+
+//拖拽
+window.onload=function(){
+	var drag = document.getElementById("drag");
+	drag.onmousedown = fnDrag;
+}
+
+function fnDrag(event){
+	
+	event=event || window.event;
+	if(event.preventDefault)
+		{
+			event.preventDefault();
+		}
+		else
+		{
+			event.returnValue=false;
+		}
+	var drag = document.getElementById("drag"),
+		disX=event.clientX-drag.offsetLeft,//鼠标在浏览器中的X坐标
+  		disY=event.clientY-drag.offsetTop;
+	//移动
+	document.onmousemove=function(event){
+		event=event || window.event;
+		fnMove(event,disX,disY);
+	}
+	//鼠标放开
+	document.onmouseup=function(){
+		document.onmousemove=null;
+		document.onmouseup=null;
+	}
+}
+
+function fnMove(e,posX,posY)
+{
+	var drag = document.getElementById("drag"),
+		w=e.clientX-posX,//鼠标在浏览器中的X坐标 - drag距离浏览器的width = 鼠标距离drag的width
+		h=e.clientY-posY,//鼠标在浏览器中的Y坐标 - drag距离浏览器的height = 鼠标距离drag的height
+		maxW=(document.body.clientWidth || document.documentElement.clientWidth)-drag.offsetWidth,//drag移动的最大width
+		maxH=(document.body.clientHeight || document.documentElement.clientHeight)-drag.offsetHeight;//drag移动的最大height
+		if(w < 0)
+		{
+			w=0;
+		}else if(w > maxW)
+		{
+			w = maxW;
+		}
+		if(h < 0)
+		{	
+			h = 0;
+		}
+		else if(h > maxH)
+		{
+			h = maxH;
+		}
+		drag.style.left = w + "px";
+		drag.style.top = h + "px";
+
+}
+
+</script>

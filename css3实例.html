@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>css3实例</title>
+
+<style type="text/css">
+	/*----css3小图标----*/
+	.demo{width:800px; height:100px; overflow:hidden; margin:0 auto; border:1px solid #cccccc;}
+	li{list-style:none; float:left; }
+	.arrow{width: 0px; height: 0px; border: 7px solid transparent; border-bottom-color: #333333; position: relative;}	
+	.arrow:after{width:1px;height:15px;#333333;}
+	.arrow-bd{position: absolute; width: 0px; height: 0px; border: 9px solid transparent; border-bottom-color: #ffffff; z-index: 9; top: 9px; left: -8px;}
+	.close{position: relative;width: 25px;height: 25px;}	
+	.close i {display:inline-block; width:20px; height:1px; background:#000000; font-size:0; line-height:0;vertical-align:middle;-webkit-transform: rotate(45deg);}
+	.close i:after {content:''; display:block; width:20px; height:1px; background:#000000;-webkit-transform: rotate(-90deg);}
+	.selecteOff,.selecteOn{display:block; width:25px; height:25px; border-radius:50%; border:1px solid #cecece; position:relative; cursor:pointer;}
+	.selecteOn{background-color:#cc0000; border:1px solid #cc0000;}
+	.selecteOn:after{content:''; top:5px; left:3px; position:absolute; display:block; width:16px; height:8px; border-left:2px solid #ffffff; border-bottom:2px solid #ffffff; cursor:pointer; transform:rotate(-45deg);-webkit-transform: rotate(-45deg);}
+	
+	
+	/*----轮播图----*/
+	.box{width:300px;height:150px;margin:50px auto 0;border:2px solid #cccccc;position:relative;}
+	.box img{width:100%; height:100%;}
+	.box .mark{width: 100%; overflow: hidden; margin: 0 auto; position: absolute; bottom: 0;padding-left: 29%;}
+	.mark a{display:block; text-align:center; text-decoration:none; margin-left:5px; border:1px solid #cccccc; width:15px; height:15px; line-height:15px;  float: left}
+	.mark .selected{background-color:#cccccc; color:#ffffff;}
+	.mark .pic{background-color:#ffffff; color:#000000;}
+</style>
+</head>
+
+<body>
+<h5>css3小图标</h5>
+<div class="demo">
+	<ul>
+		<li><i class="arrow"><i class="arrow-bd"></i></i></li>
+		<li><i class="close"><i></i></i></li>
+		<li><i class="selecteOn"></i></li>
+	</ul>
+</div>
+
+
+<!--轮播图-->
+<h5>原生js轮播图</h5>
+<div class="box">
+	<img alt="" id="img" onmouseover="selectOn()" onmouseout="selectOff()" src="images/pic1.jpg" />
+	<div class="mark">
+		<a href="javascript:void(0);" id="pic0" onmouseover="selectOn('0')" onmouseout="selectOff('0')" class="pic">1</a>
+		<a href="javascript:void(0);" id="pic1" onmouseover="selectOn('1')" onmouseout="selectOff('1')" class="pic">2</a>
+		<a href="javascript:void(0);" id="pic2" onmouseover="selectOn('2')" onmouseout="selectOff('2')" class="pic">3</a>
+		<a href="javascript:void(0);" id="pic3" onmouseover="selectOn('3')" onmouseout="selectOff('3')" class="pic">4</a>
+		<a href="javascript:void(0);" id="pic4" onmouseover="selectOn('4')" onmouseout="selectOff('4')" class="pic">5</a>
+	</div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+
+//轮播图-----1
+var i=0;
+var imgList=new Array();
+imgList[0]="images/pic1.jpg";
+imgList[1]="images/pic2.jpg";
+imgList[2]="images/pic3.jpg";
+imgList[3]="images/pic4.jpg";
+imgList[4]="images/pic5.jpg";
+var banner = setInterval(changeImg,2000);
+
+function changeImg(){
+	document.getElementById("img").src=imgList[i];
+	for(j=0; j<=imgList.length-1; j++){ document.getElementById("pic"+j).className="pic"; }
+	document.getElementById("pic"+i).className="selected";
+	if(i==imgList.length-1) i=0; else i++;
+}
+
+function selectOn(obj)
+{
+	clearInterval(banner);
+	if(obj!=null|| obj!=undefined)
+	{
+		clearInterval(banner);
+		document.getElementById("img").src=imgList[obj];
+		for(var j=0; j<=imgList.length-1; j++){ document.getElementById("pic"+j).className="pic"; }
+		document.getElementById("pic"+obj).className="selected";
+	}
+}
+
+function selectOff(obj)
+{
+	//document.getElementById(obj).className="pic";
+	setInterval(changeImg,2000);
+}
+
+
+//css3小图标-----2
+//选择框
+function()
+{
+	
+}
+
+</script>
