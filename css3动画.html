@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            height: 500px;
+            margin: 0 240px;
+            background-color: #FFFFFF;
+        }
+        /*无缝滚动*/
+        .scroll{width: 400px; overflow: hidden; margin:0 auto; border: 1px solid #cccccc; display: none}
+        ul{padding: 0;margin: 0;}
+        ul,li{list-style: none;}
+        .items{overflow: hidden; white-space: nowrap; }
+        .item{display: inline-block;}
+
+
+        /*animation*/
+        .demo{
+            width: 500px;
+            margin:0 auto;
+
+        }
+        .demo:after{
+            content: '';
+            display: block;
+            width: 0;
+            clear: both;
+            visibility: hidden;
+        }
+        .demo li{
+            float: left;
+            width: 20%;
+            padding: 20px;
+        }
+        .demo li div{ margin: 0 auto;}
+
+        .box-shadow{
+            width: 50px;
+            height: 50px;
+            background-color: #FFFFFF;
+            box-shadow: 0px 0px 30px 10px #ccc;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .box-radius{
+            width: 50px;
+            height: 50px;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            border: 1px solid #cccccc;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+
+
+        .l1{
+            width: 0;
+            height: 0;
+            border-width:0 25px 40px;
+            border-style:solid;
+            border-color: transparent transparent #cccccc;
+            -webkit-animation:demo1 2s infinite;
+
+        }
+        @-webkit-keyframes demo1{
+            0%{transform:rotate(0deg)}
+            10%{transform:rotate(10deg)}
+            20%{transform:rotate(-10deg)}
+            30%{transform:rotate(5deg)}
+            40%{transform:rotate(-5deg)}
+            50%{transform:rotate(2deg)}
+            60%{transform:rotate(-2deg)}
+            70%{transform:rotate(0deg)}
+            100%{transform:rotate(0deg)}
+        }
+
+        .l2{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #cccccc;
+            -webkit-animation:demo2 2s infinite;
+        }
+        @-webkit-keyframes demo2{
+            0%{transform:scale(1,1)}
+            50%{transform:scale(.5,.5)}
+            100%{transform:scale(1,1)}
+        }
+        .l3{
+            width: 50px;
+            height: 50px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #0066CC #cc0000;
+            background: #cccccc;
+            -webkit-animation:demo3 2s infinite;
+        }
+        @-webkit-keyframes demo3{
+            0%{transform:rotate(0deg)}
+            25%{transform:rotate(90deg)}
+            50%{transform:rotate(180deg)}
+            75%{transform:rotate(270deg)}
+            100%{transform:rotate(360deg)}
+        }
+
+
+        .l4{
+            width: 0;
+            height: 0;
+            color: red;
+            margin: 50px 0;
+            position: relative;
+            display: block;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 20px solid #cc0000;
+            -moz-transfrom: rotate(35deg);
+            -webkit-transform: rotate(35deg);
+            -ms-transform: rotate(35deg);
+            -o-transform: rotate(35deg);
+            -webkit-animation: demo4 2s infinite;
+            display: block;
+            opacity: 1;
+        }
+        .l4:before{
+            width: 0;
+            height: 0;
+            border-left: 13px solid transparent;
+            border-right: 13px solid transparent;
+            border-bottom: 35px solid #cc0000;
+            position: absolute;
+            top: -18px;
+            left: -21px;
+            color: white;
+            display: block;
+            content: "";
+            -moz-transform: rotate(-35deg);
+            -webkit-transform: rotate(-35deg);
+            -ms-transform: rotate(-35deg);
+            -o-transform: rotate(-35deg);
+        }
+        .l4:after{
+            width: 0;
+            height: 0;
+            display: block;
+            position: absolute;
+            color: red;
+            top: 0px;
+            left: -30px;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 20px solid #cc0000;
+            content: "";
+            -moz-transform: rotate(-70deg);
+            -webkit-transform: rotate(-70deg);
+            -ms-transform: rotate(-70deg);
+            -o-transform: rotate(-70deg);
+        }
+        @-webkit-keyframes demo4{
+            0%{opacity:.5;}
+            25%{opacity:0;}
+            100%{opacity:.5;}
+        }
+
+        .l5{
+            width: 50px;
+            height: 50px;
+            border-width: 5px;
+            border-radius: 50%;
+            border-style: solid;
+            border-color: rgba(144,144,144,.2);
+            border-left: 5px solid rgba(0,0,0,.5);
+            -webkit-animation:demo5 .7s linear infinite;
+        }
+        @-webkit-keyframes demo5{
+            from{transform:rotate(0deg);}
+            to{transform:rotate(360deg);}
+        }
+        h3{
+            border-bottom: 1px solid #cccccc;
+        }
+
+
+        /*摩天轮*/
+        .theme{
+            width: 400px;
+            height: 400px;
+            border: 1px solid #cccccc;
+            margin: 0 auto;
+            position: relative;
+        }
+        .pointer{
+            width: 114px;
+            height: 142px;
+            background: transparent url('images/pointer-sm.png') top center no-repeat;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -71px;
+            margin-left: -57px;
+
+        }
+        .wheel{
+            width: 163px;
+            height: 163px;
+            background: transparent url('images/wheel-sm.png') top center no-repeat;
+            position: absolute;
+            left: 50%;
+            top: 64px;
+            margin-left: -81px;
+            animation:panel 5s linear 1s infinite;
+        }
+        @-webkit-keyframes panel{
+            from {-webkit-transform:rotate(0deg);}
+            to {-webkit-transform:rotate(360deg);}
+        }
+        @-webkit-keyframes car{
+            from {-webkit-transform:rotate(0deg);}
+            to {-webkit-transform:rotate(-360deg);}
+        }
+
+        .box1{
+            width: 35px;
+            height: 34px;
+            background: transparent url('images/car1.png') top center no-repeat;
+            position: absolute;
+            animation:car 5s linear 1s infinite;
+        }
+        .box2{
+            width: 35px;
+            height: 34px;
+            background: transparent url('images/car2.png') top center no-repeat;
+            position: absolute;
+            animation:car 5s linear 1s infinite;
+        }
+        .car1{
+            left: 10px;
+            top: 8px;
+        }
+        .car2{
+            left: 64px;
+            top: -7px;
+        }
+        .car3{
+            left: 114px;
+            top: 8px;
+        }
+        .car4{
+            left: 136px;
+            top: 64px;
+        }
+        .car5{
+            left: 114px;
+            top: 119px;
+        }
+        .car6{
+            left: 64px;
+            top: 137px;
+        }
+        .car7{
+            left: 10px;
+            top: 119px;
+        }
+        .car8{
+            left: -11px;
+            top: 64px;
+        }
+
+        /*进度条*/
+        .progressBox{
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #cccccc;
+            margin: 0 auto;
+            position: relative;
+        }
+        .progressBar{
+            height: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #00a1f5;
+        }
+        .progressText{
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <!--无缝滚动-->
+        <h3>无缝滚动</h3>
+        <div class="scroll">
+            <ul class="items"><!--
+            --><li class="item"><img src="images/img_1.jpg" alt=""></li><!--
+            --><li class="item"><img src="images/img_2.jpg" alt=""></li><!--
+            --><li class="item"><img src="images/img_3.jpg" alt=""></li>
+            </ul>
+        </div>
+
+        <!--Demo-->
+        <h3>Animation</h3>
+        <ul class="demo">
+            <li><div class="box-shadow"></div></li>
+            <li><div class="box-radius"></div></li>
+            <li>
+                <div class="l1"></div>
+            </li>
+            <li>
+                <div class="l2"></div>
+            </li>
+            <li>
+                <div class="l3"></div>
+            </li>
+            <li>
+                <div class="l4"></div>
+            </li>
+            <li>
+                <div class="l5"></div>
+            </li>
+        </ul>
+
+        <!--进度条-->
+        <h3>进度条</h3>
+        <div class="progressBox">
+            <div class="progressBar"></div>
+            <div class="progressText"><span class="text">0</span>%</div>
+        </div>
+
+        <!--摩天轮-->
+        <h3>摩天轮</h3>
+        <div class="theme">
+            <div class="pointer"></div>
+            <div class="wheel">
+                <div class="box1 car1"></div>
+                <div class="box2 car2"></div>
+                <div class="box1 car3"></div>
+                <div class="box2 car4"></div>
+                <div class="box1 car5"></div>
+                <div class="box2 car6"></div>
+                <div class="box1 car7"></div>
+                <div class="box2 car8"></div>
+            </div>
+        </div>
+    </div>
+
+
+<a href="javascript: void window.open()"></a>
+</body>
+</html>
+        <script type="text/javascript">
+            var $items=$(".items"),
+                    lastTime= 0,
+                    nextFrame=window.requestAnimationFrame ||
+                            window.webkitRequestAnimationFrame ||
+                            window.mozRequestAnimationFrame ||
+                            window.msRequestAnimationFrame ||
+                            window.oRequestAnimationFrame ||
+                            function(callback){
+                                var currTime = +new Date,
+                                        delay=Math.max(1000/60,1000/60-(currTime-lastTime));
+                                lastTime=currTime+delay;
+                                return setTimeout(callback,delay);
+                            },
+                    cancelFrame=window.cancelAnimationFrame ||
+                            window.webkitCancelAnimationFrame ||
+                            window.webkitCancelRequestAnimationFrame ||
+                            window.mozCancelRequestAnimationFrame ||
+                            window.msCancelRequestAnimationFrame ||
+                            window.oCancelRequestAnimationFrame ||
+                            clearTimeout;
+            //单个子元素的宽度
+            var itemW = 302,
+                 timer=null,
+                 scrollX= 0,
+                 target=0;
+            //目标位置
+            target=itemW * $items.children().length;
+            $items.html($items.html()+$items.html());
+
+            function adAni() {
+                timer=nextFrame(function(){
+                    scrollX+=1;
+                    if(scrollX>target)
+                    {
+                        scrollX=0;
+                    }
+                    $items.scrollLeft(scrollX);
+                    adAni();
+                });
+            }
+            adAni();
+            function isMobile() {
+                return /(iphone|ipad|ipod|ios|android|mobile|blackberry|iemobile|mqqbrowser|juc|fennec|wosbrowser|browserng|Webos|symbian|windows phone)/i.test(navigator.userAgent);
+            }
+            if (!isMobile()) {
+                $items.on('mouseover', function() {
+                    cancelFrame(timer);
+                }).on('mouseout', function() { adAni(); });
+            }
+        </script>
+
+        <script type="text/javascript">
+
+
+            $(function(){
+                var progressBar=$(".progressBar"),
+                        text=$(".text"),
+                        num=0;
+                timer=setInterval(setprogress,30);
+                function setprogress() {
+                    if(num==100){
+                        clearInterval(timer);
+                    }
+                    else{
+                        num += 2;
+                        text.html(num);
+                        progressBar.css("width",num+"%");
+                    }
+                }
+            })
+
+
+
+            //原型继承
+           function inherit(p){
+               if(p==null) throw TypeError();
+               if(Object.create)
+                 return Object.create(p);
+               var t=typeof p;
+               if(t!=="object" && t!=="function") throw TypeError();
+               function f(){};
+               f.prototype=p;
+               return new f();
+           }
+            var a={};
+            a.x=1;
+            var b=inherit(a);
+            b.y=2;
+            var c=inherit(b);
+            c.z=3;
+            /*console.log(c.x+","+ c.y+","+ c.z);*/
+
+
+            /*
+            * 把p中的可枚举属性复制到o中，并返回o
+            * 如果O和P中含有同名属性，则覆盖O中的属性
+            * */
+            function extend(o,p){
+                for(prop in p){
+                    o[prop] = p[prop];
+                }
+                return o;
+            }
+
+
+
+            /*
+            * 将P中的可枚举属性复制到O中，并返回O
+            * 如果O和P中有同名的属性，O中的属性将不受影响
+            * 这个函数并不处理getter和setter以及复制属性
+            * */
+            function merge(o,p){
+                for(prop in p){
+                    if(o.hasOwnProperty(prop)) continue;
+                    o[prop] = p[prop];
+                }
+                return o;
+            }
+
+
+
+            /*
+            * 如果O中的属性在P中没有同名属性，则从O中删除这个属性
+            * 返回O
+            * */
+            function restrict(o,p){
+                for(prop in o){
+                    if(!(prop in p)) delete o[prop];
+                }
+                return o;
+            }
+
+            /*
+             * 如果O中的属性在P中有同名属性，则从O中删除这个属性
+             * 返回O
+             * */
+            function restrict(o,p){
+                for(prop in p){
+                     delete o[prop];
+                }
+                return o;
+            }
+
+           /* var o = {
+                //普通的可读写的数据属性
+                data_prop:value,
+
+                //存取器属性都是成对定义的函数
+                get accessor_prop(){},
+                set accessor_prop(value){}
+            }*/
+
+
+            var p={
+                x:1.0,
+                y:1.0,
+
+                get r(){ return Math.sqrt(this.x*this.x+this.y*this.y); },
+                set r(newValue){
+                    var oldvalue=Math.sqrt(this.x*this.x+this.y*this.y);
+                    var ratio=newValue/oldvalue;
+                    this.x*=ratio;
+                    this.y*=ratio;
+                },
+                get theta(){ return Math.atan2(this.y,this.x); }
+            }
+
+            var q=inherit(p);
+            q.x=1, q.y=1;
+
+
+            /*console.log(q.r);
+            console.log(q.theta);*/
+
+
+            var serialnum={
+                $n:0,
+                get next(){ return this.$n++;},
+                set next(n){
+                    if(n >= this.$n) this.$n = n;
+                    else throw "序列号的值不能比当前值小";
+                }
+            }
+
+            //这个对象有一个可以返回随机数的存取器属性
+            //例如，表达式“random.octet"产生一个随机数
+            //每次产生的随机数都在0——255之间
+            var random = {
+                get octet(){ return Math.floor(Math.random()*256);},
+                get uint16(){ return Math.floor(Math.random()*65536); },
+                get int16(){ return Math.floor(Math.random()*65536)-32768; }
+            }
+
+            console.log("random.octet:"+random.octet);
+            console.log(Object.getOwnPropertyDescriptor({x:1},"x"));
+            console.log("random.octet特性：" + Object.getOwnPropertyDescriptor(random,"octet"));
+            console.log(Object.getOwnPropertyDescriptor({},"x"));
+
+
+            var o={};
+            Object.defineProperty(o,"x",{
+                value:1,
+                writable:true,
+                enumerable:true,
+                configurable:true
+            })
+
+
+            Object.defineProperty(o,"x",{ get:function(){ return 0; } });
+
+
+
+            var p = Object.defineProperties({},{
+                x:{ value:1, writable:true, enumerable:true, configurable:true },
+                y:{ value:1, writable:true, enumerable:true, configurable:true },
+                r:{
+                    get:function(){ return Math.sqrt(this.x*this.x + this.y*this.y) },
+                    enumerable:true,
+                    configurable:true
+                }
+            });
+            console.log("p.x:"+ p.x);
+            console.log("p.y:"+ p.y);
+            console.log("p.r:"+ p.r);
+
+
+            //复制属性的特性
+            /*
+            * 给Object.prototype添加一个不可枚举的extend()方法
+            * 这个方法继承自调用它的对象，将作为参数传入的对象的属性一一复制
+            * 除了值之外，也复制属性的所有特性，除非在目标对象中存在同名的属性
+            * 参数对象的所有自有对象（包括不可枚举的属性）也会一一复制
+            *
+            * */
+            Object.defineProperty(Object.prototype,
+                    "extend",
+                    {
+                        writable:true,
+                        enumerable:false,//将其定义为不可枚举的
+                        configurable:true,
+                        value:function(o){//值就是这个函数
+                            //得到所有的自有属性，包括不可枚举属性
+                            var name = Object.getOwnPropertyNames(o);
+                            for(var i=0;i<names.length;i++){
+                                //如果属性已经存在，则跳过
+                                if(names[i] in this) continue;
+                                var desc = Object.getOwnPropertyDescriptor(o,names[i]);
+                                Object.defineProperty(this, names[i], desc);
+                            }
+                        }
+                    }
+            );
+
+        /*获取属性描述*/
+        var a=extend(o);
+        console.log("o.x:" + o.x);
+        console.log("o.getOwnPropertyDescriptor"+Object.getOwnPropertyDescriptor(o,"x"));
+        console.log("a.x:" + a.x);
+        console.log("a.getOwnPropertyDescriptor"+Object.getOwnPropertyDescriptor(a,"x"));
+
+        /*原型属性*/
+        var p={x:21};
+        var o=Object.create(p);
+        console.log(p.isPrototypeOf(o));
+        console.log(Object.prototype.isPrototypeOf(o));
+
+
+        /*原型使用实例*/
+        var Person=function(){
+            this.init.apply(this,arguments);
+        }
+        Person.prototype={
+            init:function(name){
+                this.name=name;
+            },
+            sayName: function () {
+                console.log(this.name)
+            }
+        }
+        var pmr=new Person("pmr");
+        pmr.sayName();
+
+        /*类属性*/
+        /*
+        * 返回类属性（防止对象继承的toString()方法重写）
+        * 可以传入任意类型的参数
+        * 数字、字符串、布尔值可以直接调用toString()，和对象调用toString()一样
+        * */
+        function classof(o){
+            if(o===null) return "null";
+            if(o===undefined) return "Undefined";
+            return Object.prototype.toString.call(o).slice(8,-1);
+        }
+
+        /*可扩展性*/
+        console.log(Object.isExtensible(o));
+
+        /*
+        * Object.seal()将对象设置为不可扩展，还可以将对象的所有自有属性都设置为不可配置de——Object.isSealed()
+        * Object.freeze()冻结对象
+        * 创建一个封闭对象，包括一个冻结的原型和一个不可枚举的属性
+        * */
+        var o=Object.seal(Object.create(Object.freeze({x:1}),{y:{value:2,writable:true}}));
+
+
+        /*数组*/
+        var count=[1,,2];
+        var undefs=[,,];
+        console.log("count.length:"+count.length);
+        console.log("count[1]:"+count[1]);
+        console.log("undefs[0]:"+undefs[0]);
+        console.log("undefs[1]:"+undefs[1]);
+
+
+        /*多维数组*/
+        //九九乘法表
+        var table=new Array(10);
+        for(var i= 0;i<table.length;i++){
+            table[i]=new Array(10);
+        }
+        for(var row=0;row<table.length;row++){
+            for(col=0;col<table[row].length;col++){
+                table[row][col]=row*col;
+            }
+        }
+        console.log(table[4]);
+
+        /*
+        * 终止循环
+        * */
+
+
+
+
+        </script>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #cccccc;
+        }
+        /*大白*/
+        .big-white{
+            width: 600px;
+            margin: 0 auto;
+            padding-top: 100px;
+            position: relative;
+        }
+        /*头部*/
+        .head{
+            width: 100px;
+            height: 70px;
+            border-radius: 47%;
+            background-color: #FFFFFF;
+            position: relative;
+            margin: 0 auto;
+            border-bottom: 2px solid #cccccc;
+            margin-bottom: -20px;
+            z-index: 10;
+        }
+        .eye-left,.eye-right{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #000;
+            position: absolute;
+
+        }
+        .eye-left{
+            top:25px;
+            left: 15px;
+        }
+        .eye-right{
+            top:25px;
+            right: 15px;
+        }
+        .mouth{
+            position: absolute;
+            width: 40px;
+            height: 4px;
+            background-color: #000000;
+            top: 31px;
+            left: 30px;
+        }
+        /*身体*/
+        .body{
+            position: relative;
+            margin: 0 auto;
+            z-index: 9;
+            width: 300px;
+            float: left;
+            margin-right: -69px;
+            margin-left: -69px;
+        }
+        .chest{
+            width: 200px;
+            height: 200px;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            margin: 0 auto;
+            border-top: 2px solid #cccccc;
+            position: relative;
+
+        }
+        .heart{
+            width: 25px;
+            height: 25px;
+            border: 1px solid #cccccc;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 2px 5px 2px #ccc inset;
+            position: absolute;
+            top: 70px;
+            right: 40px;
+        }
+        .tummy{
+            width: 300px;
+            height: 350px;
+            background-color: #FFFFFF;
+            border-radius: 47%;
+            margin: 0 auto;
+            border: 2px solid #cccccc;
+            border-top: none;
+            margin-top: -120px;
+        }
+        .arm-left,.arm-right{
+            width: 100px;
+            height: 270px;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            float: left;
+            z-index: 1;
+        }
+        .arm-left{
+            margin-left: 125px;
+            transform:rotate(30deg);
+            animation: hugsL 2s infinite;
+        }
+        .arm-right{
+            transform:rotate(-30deg);
+            animation: hugsR 2s infinite;
+        }
+        .leg-left,.leg-right{
+            width: 90px;
+            height: 150px;
+            border-radius: 47%;
+            background-color: #FFFFFF;
+            float: left;
+            margin-top: -68px;
+        }
+        .leg-left{
+            margin-left: 208px;
+        }
+        .leg-right{
+            margin-left: 20px;
+        }
+        .clear{clear: both;}
+        @-webkit-keyframes hugsL{
+            0%{transform:rotate(32deg);}
+            25%{transform:rotate(34deg);}
+            75%{transform:rotate(36deg);}
+            100%{transform:rotate(38deg);}
+        }
+        @-webkit-keyframes hugsR{
+            0%{transform:rotate(-32deg);}
+            25%{transform:rotate(-34deg);}
+            75%{transform:rotate(-36deg);}
+            100%{transform:rotate(-38deg);}
+        }
+    </style>
+</head>
+<body>
+
+<!--大白-->
+<div class="big-white">
+    <!--头部-->
+    <div class="head">
+        <div class="eye-left"></div>
+        <div class="eye-right"></div>
+        <div class="mouth"></div>
+    </div>
+    <!--身体-->
+    <div class="arm-left"></div>
+    <div class="body">
+        <div class="chest"><div class="heart"></div></div>
+        <div class="tummy"></div>
+    </div>
+    <div class="arm-right"></div>
+    <p class="clear"></p>
+    <!--腿-->
+    <div class="leg-left"></div>
+    <div class="leg-right"></div>
+</div>
+</body>
+</html>
